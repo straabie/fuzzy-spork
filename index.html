@@ -1,0 +1,117 @@
+HTML
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Spesial Untukmu ✨</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #00ffcc; /* Warna hijau neon khas terminal */
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #terminal {
+            width: 100%;
+            max-width: 600px;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+            min-height: 300px;
+            white-space: pre-wrap; /* Menjaga format spasi dan enter */
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #ff007f; /* Warna pink neon untuk teks penting/hati */
+            font-weight: bold;
+        }
+        .yellow {
+            color: #ffff00;
+        }
+    </style>
+</head>
+<body>
+
+<div id="terminal"></div>
+
+<script>
+    const terminal = document.getElementById('terminal');
+    // Simulasi efek ketik (dalam konteks HTML, ini akan memerlukan pendekatan berbeda)
+    function efek_ketik(teks, kecepatan) {
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < teks.length) {
+                terminal.textContent += teks.charAt(i);
+                i++;
+            } else {
+                clearInterval(interval);
+            }
+        }, kecepatan * 1000);
+    }
+
+    const pesan = [
+        "Membuka Pesan...\n\n",
+        "Halo Gaza! Good Luck untuk UAS dan Tugas Akhirnya! 🎓\n\n",
+        "Semangat terus ya! 🦾\n\n",
+        "Semoga lancar dan dimudahkan.\n\n",
+        "Keren gak codingnya?  😎\n\n",
+        "      <span class='highlight'>======          ======</span>\n",
+        "    <span class='highlight'>==      ==      ==      ==</span>\n",
+        "  <span class='highlight'>==          ==  ==          ==</span>\n",
+        "  <span class='highlight'>==            ==            ==</span>\n",
+        "  <span class='highlight'>==                          ==</span>\n",
+        "    <span class='highlight'>==                      ==</span>\n",
+        "      <span class='highlight'>==                  ==</span>\n",
+        "        <span class='highlight'>==              ==</span>\n",
+        "          <span class='highlight'>==          ==</span>\n",
+        "            <span class='highlight'>==      ==</span>\n",
+        "              <span class='highlight'>==  ==</span>\n",
+        "                <span class='highlight'>==</span>\n\n",
+        "<span class='yellow'>[ Program selesai. Sekarang, kembali tersenyum! 😊 ]</span>"
+    ];
+
+    let barisIndex = 0;
+    let karakterIndex = 0;
+
+    function efekKetik() {
+        if (barisIndex < pesan.length) {
+            let barisTeks = pesan[barisIndex];
+            
+            // Jika baris mengandung tag HTML (seperti warna), langsung munculkan per baris agar tidak rusak
+            if (barisTeks.includes("<span")) {
+                terminal.innerHTML += barisTeks;
+                barisIndex++;
+                setTimeout(efekKetik, 200); // Jeda antar baris gambar hati
+            } else {
+                // Efek mengetik per karakter
+                if (karakterIndex < barisTeks.length) {
+                    terminal.textContent += barisTeks.charAt(karakterIndex);
+                    karakterIndex++;
+                    setTimeout(efekKetik, 40); // Kecepatan mengetik huruf (40ms)
+                } else {
+                    karakterIndex = 0;
+                    barisIndex++;
+                    setTimeout(efekKetik, 800); // Jeda setelah satu kalimat selesai
+                }
+            }
+            // Auto scroll ke bawah jika teksnya panjang
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    }
+
+    // Jalankan efek setelah web berhasil dimuat
+    window.addEventListener('load', () => {
+        setTimeout(efekKetik, 1000);
+    });
+</script>
+
+</body>
+</html>
